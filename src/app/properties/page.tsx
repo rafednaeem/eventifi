@@ -30,9 +30,9 @@ export default async function PropertiesSearchPage({
         <div className="flex flex-col min-h-screen">
             <Navbar />
 
-            <main className="flex-1 bg-zinc-50 dark:bg-zinc-950">
+            <main className="flex-1 bg-background">
                 {/* Search Header */}
-                <section className="bg-white dark:bg-zinc-900 border-b border-border py-8">
+                <section className="bg-card border-b border-border py-8">
                     <div className="container px-4 sm:px-8 max-w-7xl mx-auto">
                         <h1 className="text-2xl font-bold mb-6">Find Event Properties</h1>
 

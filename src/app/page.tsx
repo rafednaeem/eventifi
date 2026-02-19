@@ -87,7 +87,7 @@ export default async function LandingPage() {
         </section>
 
         {/* Services Categories */}
-        <section className="py-20 bg-zinc-50 dark:bg-zinc-900">
+        <section className="py-20 bg-card/30">
           <div className="container px-4 sm:px-8 max-w-7xl mx-auto">
             <div className="mb-12 text-center">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-foreground">
@@ -106,7 +106,7 @@ export default async function LandingPage() {
                     href={`/services/category/${category.slug}`}
                     className="group flex items-center p-6 rounded-[1.5rem] border border-border bg-card/40 backdrop-blur-sm transition-all hover:bg-card hover:border-primary/40 hover:shadow-xl"
                   >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-100 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                       <Icon className="h-6 w-6" />
                     </div>
                     <div className="ml-4 flex-1">
@@ -169,17 +169,17 @@ export default async function LandingPage() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-zinc-950 text-white py-12">
+      <footer className="bg-black text-white py-12 border-t border-white/5">
         <div className="container px-4 sm:px-8 max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
           <div className="col-span-2">
             <span className="text-3xl font-black text-primary">Eventifi</span>
-            <p className="mt-4 text-zinc-400 max-w-xs">
+            <p className="mt-4 text-muted-foreground max-w-xs">
               Pakistan's leading marketplace for event spaces and professional services. Join the revolution.
             </p>
           </div>
           <div>
             <h4 className="font-bold mb-4">Marketplace</h4>
-            <ul className="space-y-2 text-sm text-zinc-400">
+            <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link href="/properties">Browse Venues</Link></li>
               <li><Link href="/services">Find Services</Link></li>
               <li><Link href="/locations">Top Cities</Link></li>
@@ -187,14 +187,14 @@ export default async function LandingPage() {
           </div>
           <div>
             <h4 className="font-bold mb-4">Partner</h4>
-            <ul className="space-y-2 text-sm text-zinc-400">
+            <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link href="/signup">List Property</Link></li>
               <li><Link href="/signup">Join as Vendor</Link></li>
               <li><Link href="/partner/guide">Partner Guide</Link></li>
             </ul>
           </div>
         </div>
-        <div className="container px-4 sm:px-8 max-w-7xl mx-auto mt-12 pt-8 border-t border-zinc-800 text-center text-xs text-zinc-500">
+        <div className="container px-4 sm:px-8 max-w-7xl mx-auto mt-12 pt-8 border-t border-white/5 text-center text-xs text-muted-foreground">
           © {new Date().getFullYear()} Eventifi Pakistan. All rights reserved.
         </div>
       </footer>
