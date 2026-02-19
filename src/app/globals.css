@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+@layer base {
+  :root {
+    --background: 25 100% 98%;
+    --foreground: 24 10% 10%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 24 10% 10%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 24 10% 10%;
+    
+    --primary: 24 95% 53%; /* Eventifi Orange */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 24 10% 90%;
+    --secondary-foreground: 24 10% 10%;
+    
+    --muted: 24 10% 95%;
+    --muted-foreground: 24 10% 40%;
+    
+    --accent: 24 95% 95%;
+    --accent-foreground: 24 95% 53%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 24 10% 90%;
+    --input: 24 10% 90%;
+    --ring: 24 95% 53%;
+    
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 24 10% 5%;
+    --foreground: 0 0% 98%;
+    
+    --card: 24 10% 7%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 24 10% 7%;
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 24 95% 53%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 24 10% 15%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 24 10% 15%;
+    --muted-foreground: 24 10% 65%;
+    
+    --accent: 24 95% 15%;
+    --accent-foreground: 24 95% 53%;
+    
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 24 10% 15%;
+    --input: 24 10% 15%;
+    --ring: 24 95% 53%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
