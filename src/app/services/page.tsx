@@ -44,16 +44,16 @@ export default async function ServicesSearchPage({
             <Navbar />
 
             <main className="flex-1 pb-20">
-                <section className="bg-orange-50 dark:bg-zinc-900 border-b border-orange-100 py-16">
+                <section className="bg-card border-b border-border py-16">
                     <div className="container px-4 sm:px-8 max-w-7xl mx-auto">
-                        <h1 className="text-4xl font-black tracking-tight mb-4 text-zinc-900 dark:text-zinc-100">Event Services & Vendors</h1>
+                        <h1 className="text-4xl font-black tracking-tight mb-4 text-foreground">Event Services & Vendors</h1>
                         <p className="text-muted-foreground text-lg max-w-2xl">
                             From award-winning catering to cinematic photography, find top-rated professionals for your big day.
                         </p>
                     </div>
                 </section>
 
-                <section className="container px-4 sm:px-8 max-w-7xl mx-auto mt-12 text-zinc-900 dark:text-zinc-100">
+                <section className="container px-4 sm:px-8 max-w-7xl mx-auto mt-12 text-foreground">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                         {/* Filters Sidebar */}
                         <aside className="space-y-8">
