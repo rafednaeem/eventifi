@@ -32,20 +32,49 @@
 
 @layer base {
   :root {
+    --background: 25 100% 98%;
+    --foreground: 24 10% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 24 10% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 24 10% 10%;
+
+    --primary: 24 95% 53%;
+    /* Eventifi Orange */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 24 10% 90%;
+    --secondary-foreground: 24 10% 10%;
+
+    --muted: 24 10% 95%;
+    --muted-foreground: 24 10% 40%;
+
+    --accent: 24 95% 95%;
+    --accent-foreground: 24 95% 53%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 24 10% 90%;
+    --input: 24 10% 90%;
+    --ring: 24 95% 53%;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
     --background: 24 10% 5%;
-    /* Zinc-950 */
     --foreground: 0 0% 98%;
-    /* Zinc-50 */
 
     --card: 24 10% 7%;
-    /* Zinc-900 */
     --card-foreground: 0 0% 98%;
 
     --popover: 24 10% 7%;
     --popover-foreground: 0 0% 98%;
 
     --primary: 24 95% 53%;
-    /* Eventifi Orange */
     --primary-foreground: 0 0% 100%;
 
     --secondary: 24 10% 15%;
@@ -63,16 +92,6 @@
     --border: 24 10% 15%;
     --input: 24 10% 15%;
     --ring: 24 95% 53%;
-
-    --radius: 0.75rem;
-  }
-
-  .dark {
-    /* Keep dark the same or slightly adjust if needed, but :root is now dark */
-    --background: 24 10% 4%;
-    --foreground: 0 0% 100%;
-
-    --primary: 24 95% 50%;
   }
 }
 

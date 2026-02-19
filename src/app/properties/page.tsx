@@ -30,9 +30,9 @@ export default async function PropertiesSearchPage({
         <div className="flex flex-col min-h-screen">
             <Navbar />
 
-            <main className="flex-1 bg-background">
+            <main className="flex-1 bg-zinc-50 dark:bg-zinc-950">
                 {/* Search Header */}
-                <section className="bg-card border-b border-border py-8">
+                <section className="bg-white dark:bg-zinc-900 border-b border-border py-8">
                     <div className="container px-4 sm:px-8 max-w-7xl mx-auto">
                         <h1 className="text-2xl font-bold mb-6">Find Event Properties</h1>
 
@@ -119,7 +119,7 @@ export default async function PropertiesSearchPage({
                                             </div>
                                         )}
                                         <div className="absolute bottom-4 left-4 right-4">
-                                            <span className="bg-background/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-primary">
+                                            <span className="bg-white/90 dark:bg-black/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-primary">
                                                 PKR {property.price_min?.toLocaleString()} / event
                                             </span>
                                         </div>

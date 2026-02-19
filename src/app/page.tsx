@@ -28,7 +28,7 @@ export default async function LandingPage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative py-20 overflow-hidden bg-background">
+        <section className="relative py-20 overflow-hidden bg-orange-50 dark:bg-zinc-950">
           <div className="container relative z-10 px-4 sm:px-8 max-w-7xl mx-auto">
             <div className="text-center">
               <h1 className="text-5xl font-extrabold tracking-tight text-foreground sm:text-6xl md:text-7xl">
@@ -65,7 +65,7 @@ export default async function LandingPage() {
               </p>
             </div>
             <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
-              {propertyCategories?.map((category: any) => {
+              {propertyCategories?.map((category) => {
                 const Icon = icons[category.icon || 'Building'] || Building
                 return (
                   <Link
@@ -87,7 +87,7 @@ export default async function LandingPage() {
         </section>
 
         {/* Services Categories */}
-        <section className="py-20 bg-card/50">
+        <section className="py-20 bg-zinc-50 dark:bg-zinc-900">
           <div className="container px-4 sm:px-8 max-w-7xl mx-auto">
             <div className="mb-12 text-center">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-foreground">
@@ -98,7 +98,7 @@ export default async function LandingPage() {
               </p>
             </div>
             <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3">
-              {serviceCategories?.map((category: any) => {
+              {serviceCategories?.map((category) => {
                 const Icon = icons[category.icon || 'Sparkles'] || Sparkles
                 return (
                   <Link
@@ -106,7 +106,7 @@ export default async function LandingPage() {
                     href={`/services/category/${category.slug}`}
                     className="group flex items-center p-6 rounded-2xl border border-border bg-card transition-all hover:border-primary hover:shadow-lg"
                   >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-100 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                       <Icon className="h-6 w-6" />
                     </div>
                     <div className="ml-4 flex-1">
@@ -154,8 +154,8 @@ export default async function LandingPage() {
                 <span className="text-primary font-bold text-xl opacity-40">Property & Service Showcase</span>
               </div>
               {/* Floating Badge */}
-              <div className="absolute -bottom-6 -left-6 bg-card p-6 rounded-2xl shadow-2xl border border-border flex items-center gap-4">
-                <div className="h-12 w-12 rounded-full bg-green-500/10 flex items-center justify-center text-green-500">
+              <div className="absolute -bottom-6 -left-6 bg-white dark:bg-zinc-800 p-6 rounded-2xl shadow-2xl border border-border flex items-center gap-4">
+                <div className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center text-green-600">
                   <span className="text-2xl">✓</span>
                 </div>
                 <div>
