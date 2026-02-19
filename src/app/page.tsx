@@ -28,7 +28,7 @@ export default async function LandingPage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative py-20 overflow-hidden bg-orange-50 dark:bg-zinc-950">
+        <section className="relative py-28 overflow-hidden">
           <div className="container relative z-10 px-4 sm:px-8 max-w-7xl mx-auto">
             <div className="text-center">
               <h1 className="text-5xl font-extrabold tracking-tight text-foreground sm:text-6xl md:text-7xl">
@@ -71,7 +71,7 @@ export default async function LandingPage() {
                   <Link
                     key={category.id}
                     href={`/properties/category/${category.slug}`}
-                    className="group flex flex-col items-center p-6 rounded-2xl border border-border bg-card transition-all hover:border-primary hover:shadow-lg hover:-translate-y-1"
+                    className="group flex flex-col items-center p-6 rounded-[2rem] border border-border bg-card/50 transition-all hover:bg-card hover:border-primary/50 hover:shadow-[0_0_30px_-10px_rgba(255,112,0,0.3)] hover:-translate-y-1"
                   >
                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                       <Icon className="h-6 w-6" />
@@ -104,7 +104,7 @@ export default async function LandingPage() {
                   <Link
                     key={category.id}
                     href={`/services/category/${category.slug}`}
-                    className="group flex items-center p-6 rounded-2xl border border-border bg-card transition-all hover:border-primary hover:shadow-lg"
+                    className="group flex items-center p-6 rounded-[1.5rem] border border-border bg-card/40 backdrop-blur-sm transition-all hover:bg-card hover:border-primary/40 hover:shadow-xl"
                   >
                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-100 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                       <Icon className="h-6 w-6" />
@@ -154,9 +154,9 @@ export default async function LandingPage() {
                 <span className="text-primary font-bold text-xl opacity-40">Property & Service Showcase</span>
               </div>
               {/* Floating Badge */}
-              <div className="absolute -bottom-6 -left-6 bg-white dark:bg-zinc-800 p-6 rounded-2xl shadow-2xl border border-border flex items-center gap-4">
-                <div className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-                  <span className="text-2xl">✓</span>
+              <div className="absolute -bottom-6 -left-6 bg-card/90 backdrop-blur-xl p-6 rounded-3xl shadow-2xl border border-white/10 flex items-center gap-4">
+                <div className="h-12 w-12 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                  <span className="text-2xl font-bold">✓</span>
                 </div>
                 <div>
                   <p className="font-bold text-sm">150+ Verified Venues</p>
