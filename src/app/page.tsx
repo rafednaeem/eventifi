@@ -2,14 +2,14 @@ import Link from 'next/link'
 import { Navbar } from '@/components/layout/navbar'
 import { Button } from '@/components/ui'
 import { createClient } from '@/lib/supabase/server'
-import { Building, Camera, Heart, Music, Palette, Utensils, Waves, Trophy, Trees, Sparkles, Video, Truck, Users, Calendar } from 'lucide-react'
+import { Building, Camera, Heart, Music, Palette, Utensils, Waves, Trophy, Trees, Sparkles, Video, Truck, Users, Calendar, Home } from 'lucide-react'
 
 // Icon mapping helper
 const icons: Record<string, any> = {
-  Building, Camera, Waves, Trophy, Trees, Utensils, Music, Palette, Video, Truck, Users, Calendar, Heart, Sparkles
+  Building, Camera, Waves, Trophy, Trees, Utensils, Music, Palette, Video, Truck, Users, Calendar, Heart, Sparkles, Home
 }
 
-export default async function Home() {
+export default async function LandingPage() {
   const supabase = await createClient()
 
   const { data: propertyCategories } = await supabase
@@ -66,7 +66,7 @@ export default async function Home() {
             </div>
             <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
               {propertyCategories?.map((category) => {
-                const Icon = icons[category.icon || 'Building']
+                const Icon = icons[category.icon || 'Building'] || Building
                 return (
                   <Link
                     key={category.id}
@@ -99,7 +99,7 @@ export default async function Home() {
             </div>
             <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3">
               {serviceCategories?.map((category) => {
-                const Icon = icons[category.icon || 'Sparkles']
+                const Icon = icons[category.icon || 'Sparkles'] || Sparkles
                 return (
                   <Link
                     key={category.id}
