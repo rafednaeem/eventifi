@@ -32,38 +32,34 @@
 
 @layer base {
   :root {
-    --background: 24 10% 5%;
-    /* Zinc-950 */
-    --foreground: 0 0% 98%;
-    /* Zinc-50 */
-
-    --card: 24 10% 7%;
-    /* Zinc-900 */
-    --card-foreground: 0 0% 98%;
-
-    --popover: 24 10% 7%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 24 95% 53%;
-    /* Eventifi Orange */
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 24 10% 15%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 24 10% 15%;
-    --muted-foreground: 24 10% 65%;
-
-    --accent: 24 95% 15%;
-    --accent-foreground: 24 95% 53%;
-
-    --destructive: 0 62% 30%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 24 10% 15%;
-    --input: 24 10% 15%;
-    --ring: 24 95% 53%;
-
+    --background: hsl(24 10% 5%);
+    --foreground: hsl(0 0% 98%);
+    
+    --card: hsl(24 10% 7%);
+    --card-foreground: hsl(0 0% 98%);
+    
+    --popover: hsl(24 10% 7%);
+    --popover-foreground: hsl(0 0% 98%);
+    
+    --primary: hsl(24 95% 53%);
+    --primary-foreground: hsl(0 0% 100%);
+    
+    --secondary: hsl(24 10% 15%);
+    --secondary-foreground: hsl(0 0% 98%);
+    
+    --muted: hsl(24 10% 15%);
+    --muted-foreground: hsl(24 10% 65%);
+    
+    --accent: hsl(24 95% 15%);
+    --accent-foreground: hsl(24 95% 53%);
+    
+    --destructive: hsl(0 62% 30%);
+    --destructive-foreground: hsl(0 0% 98%);
+    
+    --border: hsl(24 10% 15%);
+    --input: hsl(24 10% 15%);
+    --ring: hsl(24 95% 53%);
+    
     --radius: 0.75rem;
   }
 
