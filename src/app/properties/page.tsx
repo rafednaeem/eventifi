@@ -1,27 +1,16 @@
 import { Navbar } from '@/components/layout/navbar'
 import { createClient } from '@/lib/supabase/server'
-import { Button, Input } from '@/components/ui'
+import { Button, Input, Label } from '@/components/ui'
 import Link from 'next/link'
 import { Search, MapPin, Building, Users, Filter } from 'lucide-react'
 
-export default async function PropertiesSearchPage({
-    searchParams,
-}: {
-    searchParams: { city?: string; category?: string; guests?: string }
-}) {
+export default async function PropertiesSearchPage({ searchParams }: { searchParams: { city?: string; category?: string; guests?: string } }) {
     const supabase = await createClient()
-
-    // Fetch data
-    const { data: properties } = await supabase
-        .from('properties')
-        .select(`
-      *,
-      property_categories (name),
-      cities (name)
-    `)
-        .eq('status', 'approved')
-        .eq('is_active', true)
-        .order('is_featured', { ascending: false })
+    let query = supabase.from('properties').select('*, property_categories(name), cities(name)').eq('status', 'approved').eq('is_active', true)
+    if (searchParams.city) query = query.eq('city_id', searchParams.city)
+    if (searchParams.category) query = query.eq('category_id', searchParams.category)
+    if (searchParams.guests) query = query.gte('capacity_max', parseInt(searchParams.guests))
+    const { data: properties } = await query.order('is_featured', { ascending: false })
 
     const { data: cities } = await supabase.from('cities').select('*').order('name')
     const { data: categories } = await supabase.from('property_categories').select('*').order('name')
@@ -36,42 +25,36 @@ export default async function PropertiesSearchPage({
                     <div className="container px-4 sm:px-8 max-w-7xl mx-auto">
                         <h1 className="text-2xl font-bold mb-6">Find Event Properties</h1>
 
-                        <div className="grid gap-4 md:grid-cols-4 items-end">
+                        <form method="GET" action="/properties" className="grid gap-4 md:grid-cols-4 items-end">
                             <div className="space-y-2">
-                                <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Location</label>
-                                <div className="relative">
+                                <Label htmlFor="city" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Location</Label>
+                                <div className="relative text-zinc-900 dark:text-zinc-100">
                                     <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                                    <select className="flex h-10 w-full rounded-md border border-input bg-background pl-9 pr-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                                    <select id="city" name="city" defaultValue={searchParams.city} className="flex h-10 w-full rounded-md border border-input bg-background pl-9 pr-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
                                         <option value="">All Pakistan</option>
                                         {cities?.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                                     </select>
                                 </div>
                             </div>
-
                             <div className="space-y-2">
-                                <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Venue Type</label>
-                                <div className="relative">
+                                <Label htmlFor="category" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Venue Type</Label>
+                                <div className="relative text-zinc-900 dark:text-zinc-100">
                                     <Building className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                                    <select className="flex h-10 w-full rounded-md border border-input bg-background pl-9 pr-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                                    <select id="category" name="category" defaultValue={searchParams.category} className="flex h-10 w-full rounded-md border border-input bg-background pl-9 pr-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
                                         <option value="">Any Type</option>
                                         {categories?.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                                     </select>
                                 </div>
                             </div>
-
                             <div className="space-y-2">
-                                <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Min Guests</label>
+                                <Label htmlFor="guests" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Min Guests</Label>
                                 <div className="relative">
                                     <Users className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                                    <Input type="number" placeholder="e.g. 100" className="pl-9" />
+                                    <Input id="guests" name="guests" type="number" placeholder="e.g. 100" defaultValue={searchParams.guests} className="pl-9" />
                                 </div>
                             </div>
-
-                            <Button className="w-full gap-2">
-                                <Search className="h-4 w-4" />
-                                Search Venues
-                            </Button>
-                        </div>
+                            <Button type="submit" className="w-full gap-2"><Search className="h-4 w-4" /> Search Venues</Button>
+                        </form>
                     </div>
                 </section>
 
@@ -88,8 +71,9 @@ export default async function PropertiesSearchPage({
                     </div>
 
                     {!properties || properties.length === 0 ? (
-                        <div className="text-center py-20">
-                            <p className="text-muted-foreground">No properties found matching your criteria.</p>
+                        <div className="text-center py-20 border-2 border-dashed border-border rounded-2xl">
+                            <p className="text-muted-foreground mb-4">No properties found matching your criteria.</p>
+                            <Link href="/properties"><Button variant="outline" size="sm">Clear All Filters</Button></Link>
                         </div>
                     ) : (
                         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
