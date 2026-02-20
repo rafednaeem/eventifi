@@ -58,6 +58,7 @@ export default async function PropertyDetailPage({
                         <div className="md:col-span-2 relative rounded-2xl overflow-hidden group">
                             <img
                                 src={property.cover_image_url || property.property_images?.[0]?.image_url}
+                                alt={property.name}
                                 className="h-full w-full object-cover transition-transform group-hover:scale-105"
                             />
                             <div className="absolute top-4 left-4">
@@ -69,7 +70,11 @@ export default async function PropertyDetailPage({
                         <div className="hidden md:grid md:col-span-2 grid-cols-2 gap-4">
                             {property.property_images?.slice(1, 5).map((img: any, i: number) => (
                                 <div key={i} className="relative rounded-xl overflow-hidden group bg-muted">
-                                    <img src={img.image_url} className="h-full w-full object-cover transition-transform group-hover:scale-105" />
+                                    <img
+                                        src={img.image_url}
+                                        alt={`${property.name} gallery image ${i + 1}`}
+                                        className="h-full w-full object-cover transition-transform group-hover:scale-105"
+                                    />
                                 </div>
                             ))}
                             {(!property.property_images || property.property_images.length < 5) && (

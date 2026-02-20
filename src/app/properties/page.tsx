@@ -1,18 +1,19 @@
 import { Navbar } from '@/components/layout/navbar'
 import { createClient } from '@/lib/supabase/server'
-import { Button, Input } from '@/components/ui'
+import { Button, Input, Label } from '@/components/ui'
 import Link from 'next/link'
 import { Search, MapPin, Building, Users, Filter } from 'lucide-react'
 
 export default async function PropertiesSearchPage({
     searchParams,
 }: {
-    searchParams: { city?: string; category?: string; guests?: string }
+    searchParams: Promise<{ city?: string; category?: string; guests?: string }>
 }) {
+    const resolvedParams = await searchParams
     const supabase = await createClient()
 
     // Fetch data
-    const { data: properties } = await supabase
+    let query = supabase
         .from('properties')
         .select(`
       *,
@@ -21,7 +22,21 @@ export default async function PropertiesSearchPage({
     `)
         .eq('status', 'approved')
         .eq('is_active', true)
-        .order('is_featured', { ascending: false })
+
+    if (resolvedParams.city) {
+        query = query.eq('city_id', resolvedParams.city)
+    }
+    if (resolvedParams.category) {
+        query = query.eq('category_id', resolvedParams.category)
+    }
+    if (resolvedParams.guests) {
+        const guestCount = parseInt(resolvedParams.guests)
+        if (!isNaN(guestCount)) {
+            query = query.gte('capacity_max', guestCount)
+        }
+    }
+
+    const { data: properties } = await query.order('is_featured', { ascending: false })
 
     const { data: cities } = await supabase.from('cities').select('*').order('name')
     const { data: categories } = await supabase.from('property_categories').select('*').order('name')
@@ -36,12 +51,17 @@ export default async function PropertiesSearchPage({
                     <div className="container px-4 sm:px-8 max-w-7xl mx-auto">
                         <h1 className="text-2xl font-bold mb-6">Find Event Properties</h1>
 
-                        <div className="grid gap-4 md:grid-cols-4 items-end">
+                        <form method="GET" action="/properties" className="grid gap-4 md:grid-cols-4 items-end">
                             <div className="space-y-2">
-                                <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Location</label>
+                                <Label htmlFor="city" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Location</Label>
                                 <div className="relative">
                                     <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                                    <select className="flex h-10 w-full rounded-md border border-input bg-background pl-9 pr-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                                    <select
+                                        id="city"
+                                        name="city"
+                                        defaultValue={resolvedParams.city}
+                                        className="flex h-10 w-full rounded-md border border-input bg-background pl-9 pr-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                                    >
                                         <option value="">All Pakistan</option>
                                         {cities?.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                                     </select>
@@ -49,10 +69,15 @@ export default async function PropertiesSearchPage({
                             </div>
 
                             <div className="space-y-2">
-                                <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Venue Type</label>
+                                <Label htmlFor="category" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Venue Type</Label>
                                 <div className="relative">
                                     <Building className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                                    <select className="flex h-10 w-full rounded-md border border-input bg-background pl-9 pr-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                                    <select
+                                        id="category"
+                                        name="category"
+                                        defaultValue={resolvedParams.category}
+                                        className="flex h-10 w-full rounded-md border border-input bg-background pl-9 pr-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                                    >
                                         <option value="">Any Type</option>
                                         {categories?.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                                     </select>
@@ -60,18 +85,25 @@ export default async function PropertiesSearchPage({
                             </div>
 
                             <div className="space-y-2">
-                                <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Min Guests</label>
+                                <Label htmlFor="guests" className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Min Guests</Label>
                                 <div className="relative">
                                     <Users className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                                    <Input type="number" placeholder="e.g. 100" className="pl-9" />
+                                    <Input
+                                        id="guests"
+                                        name="guests"
+                                        type="number"
+                                        placeholder="e.g. 100"
+                                        className="pl-9"
+                                        defaultValue={resolvedParams.guests}
+                                    />
                                 </div>
                             </div>
 
-                            <Button className="w-full gap-2">
+                            <Button type="submit" className="w-full gap-2">
                                 <Search className="h-4 w-4" />
                                 Search Venues
                             </Button>
-                        </div>
+                        </form>
                     </div>
                 </section>
 
