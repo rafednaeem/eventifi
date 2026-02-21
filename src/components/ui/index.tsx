@@ -3,6 +3,8 @@
 import { useFormStatus } from "react-dom";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 
 /** Utility for merging tailwind classes */
 export function cn(...inputs: ClassValue[]) {
@@ -62,18 +64,38 @@ export function Button({
 }
 
 /** Standard Input Component */
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> { }
+export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 export function Input({ className, type, ...props }: InputProps) {
+    const [showPassword, setShowPassword] = useState(false);
+    const isPassword = type === 'password';
+
     return (
-        <input
-            type={type}
-            className={cn(
-                "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
-                className
+        <div className="relative w-full">
+            <input
+                type={isPassword ? (showPassword ? 'text' : 'password') : type}
+                className={cn(
+                    "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+                    isPassword && "pr-10",
+                    className
+                )}
+                {...props}
+            />
+            {isPassword && (
+                <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm transition-colors"
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                    {showPassword ? (
+                        <EyeOff className="h-4 w-4" aria-hidden="true" />
+                    ) : (
+                        <Eye className="h-4 w-4" aria-hidden="true" />
+                    )}
+                </button>
             )}
-            {...props}
-        />
+        </div>
     );
 }
 
