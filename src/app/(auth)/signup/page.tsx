@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { signup } from './actions'
-import { Button, Input, Label } from '@/components/ui'
+import { Button, Input, Label, PasswordInput } from '@/components/ui'
 
 export default function SignupPage() {
     const [error, setError] = useState<string | null>(null)
@@ -42,7 +42,7 @@ export default function SignupPage() {
 
                 <div className="space-y-2">
                     <Label htmlFor="password">Password</Label>
-                    <Input id="password" name="password" type="password" required />
+                    <PasswordInput id="password" name="password" required />
                 </div>
 
                 <div className="space-y-2">

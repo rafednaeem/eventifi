@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import { useFormStatus } from "react-dom";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { Eye, EyeOff } from "lucide-react";
 
 /** Utility for merging tailwind classes */
 export function cn(...inputs: ClassValue[]) {
@@ -62,7 +64,7 @@ export function Button({
 }
 
 /** Standard Input Component */
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> { }
+export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 export function Input({ className, type, ...props }: InputProps) {
     return (
@@ -80,4 +82,27 @@ export function Input({ className, type, ...props }: InputProps) {
 /** Standard Label Component */
 export function Label({ className, ...props }: React.LabelHTMLAttributes<HTMLLabelElement>) {
     return <label className={cn("text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70", className)} {...props} />;
+}
+
+/** Password Input Component with Toggle */
+export function PasswordInput({ className, ...props }: InputProps) {
+    const [showPassword, setShowPassword] = useState(false);
+
+    return (
+        <div className="relative w-full">
+            <Input
+                type={showPassword ? "text" : "password"}
+                className={cn("pr-10", className)}
+                {...props}
+            />
+            <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm transition-colors"
+                aria-label={showPassword ? "Hide password" : "Show password"}
+            >
+                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+            </button>
+        </div>
+    );
 }
