@@ -19,8 +19,7 @@ export function AdminSidebar() {
 
     const navItems = [
         { name: 'Overview', href: '/admin', icon: LayoutDashboard },
-        { name: 'Properties', href: '/admin/properties', icon: Building2 },
-        { name: 'Services', href: '/admin/services', icon: Briefcase },
+        { name: 'Manage Listings', href: '/admin/listings', icon: Building2 },
         { name: 'Inquiries', href: '/admin/inquiries', icon: MessageSquare },
         { name: 'Settings', href: '/admin/settings', icon: Settings },
     ]

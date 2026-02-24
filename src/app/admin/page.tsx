@@ -14,18 +14,18 @@ import {
 export default async function AdminDashboardPage() {
     const supabase = await createClient()
 
-    // Fetch basic stats
-    const { count: propertyCount } = await supabase.from('properties').select('*', { count: 'exact', head: true })
-    const { count: pendingProperties } = await supabase.from('properties').select('*', { count: 'exact', head: true }).eq('status', 'pending')
+    // Fetch basic stats from unified listings table
+    const { count: propertyCount } = await supabase.from('listings').select('*', { count: 'exact', head: true }).eq('type', 'venue')
+    const { count: pendingProperties } = await supabase.from('listings').select('*', { count: 'exact', head: true }).eq('type', 'venue').eq('status', 'pending')
 
-    const { count: serviceCount } = await supabase.from('services').select('*', { count: 'exact', head: true })
-    const { count: pendingServices } = await supabase.from('services').select('*', { count: 'exact', head: true }).eq('status', 'pending')
+    const { count: serviceCount } = await supabase.from('listings').select('*', { count: 'exact', head: true }).eq('type', 'service')
+    const { count: pendingServices } = await supabase.from('listings').select('*', { count: 'exact', head: true }).eq('type', 'service').eq('status', 'pending')
 
     const { count: inquiryCount } = await supabase.from('inquiries').select('*', { count: 'exact', head: true })
     const { count: newInquiries } = await supabase.from('inquiries').select('*', { count: 'exact', head: true }).eq('status', 'new')
 
     const stats = [
-        { label: 'Total Properties', value: propertyCount || 0, pending: pendingProperties || 0, icon: Building2, color: 'text-blue-600', bg: 'bg-blue-50' },
+        { label: 'Total Venues', value: propertyCount || 0, pending: pendingProperties || 0, icon: Building2, color: 'text-blue-600', bg: 'bg-blue-50' },
         { label: 'Total Services', value: serviceCount || 0, pending: pendingServices || 0, icon: Briefcase, color: 'text-purple-600', bg: 'bg-purple-50' },
         { label: 'Total Inquiries', value: inquiryCount || 0, pending: newInquiries || 0, icon: MessageSquare, color: 'text-orange-600', bg: 'bg-orange-50' },
     ]

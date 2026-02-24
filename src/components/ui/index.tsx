@@ -81,3 +81,56 @@ export function Input({ className, type, ...props }: InputProps) {
 export function Label({ className, ...props }: React.LabelHTMLAttributes<HTMLLabelElement>) {
     return <label className={cn("text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70", className)} {...props} />;
 }
+
+/** Standard Textarea Component */
+export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> { }
+
+export function Textarea({ className, ...props }: TextareaProps) {
+    return (
+        <textarea
+            className={cn(
+                "flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+                className
+            )}
+            {...props}
+        />
+    );
+}
+
+/** Standard Select Component */
+export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> { }
+
+export function Select({ className, children, ...props }: SelectProps) {
+    return (
+        <select
+            className={cn(
+                "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+                className
+            )}
+            {...props}
+        >
+            {children}
+        </select>
+    );
+}
+
+/** Standard Checkbox/Switch Component */
+export interface SwitchProps extends React.InputHTMLAttributes<HTMLInputElement> {
+    label?: string;
+}
+
+export function Switch({ className, label, ...props }: SwitchProps) {
+    return (
+        <div className="flex items-center gap-2">
+            <input
+                type="checkbox"
+                className={cn(
+                    "h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary",
+                    className
+                )}
+                {...props}
+            />
+            {label && <Label>{label}</Label>}
+        </div>
+    );
+}

@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import { cn } from '@/components/ui'
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import { Building2, LayoutDashboard, PlusCircle, Settings, MessageSquare, Briefcase } from 'lucide-react'
+import { Building2, LayoutDashboard, PlusCircle, Settings, MessageSquare, Briefcase, ShieldAlert } from 'lucide-react'
 
 export function DashboardSidebar() {
     const pathname = usePathname()
@@ -26,18 +26,18 @@ export function DashboardSidebar() {
     const navItems = [
         { name: 'Overview', href: '/dashboard', icon: LayoutDashboard, show: true },
         {
-            name: 'My Properties',
-            href: '/dashboard/properties',
+            name: 'My Listings',
+            href: '/dashboard/listings',
             icon: Building2,
-            show: role === 'property_owner' || role === 'admin'
+            show: role === 'property_owner' || role === 'service_provider' || role === 'admin'
         },
+        { name: 'Bookings', href: '/dashboard/bookings', icon: MessageSquare, show: true },
         {
-            name: 'My Services',
-            href: '/dashboard/services',
-            icon: Briefcase,
-            show: role === 'service_provider' || role === 'admin'
+            name: 'Admin Panel',
+            href: '/dashboard/admin',
+            icon: ShieldAlert,
+            show: role === 'admin'
         },
-        { name: 'Inquiries', href: '/dashboard/leads', icon: MessageSquare, show: true },
         { name: 'Settings', href: '/dashboard/settings', icon: Settings, show: true },
     ]
 

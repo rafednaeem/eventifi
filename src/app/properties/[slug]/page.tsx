@@ -9,8 +9,9 @@ import { PropertyAvailability } from '@/components/properties/availability-calen
 export default async function PropertyDetailPage({
     params,
 }: {
-    params: { slug: string }
+    params: Promise<{ slug: string }>
 }) {
+    const { slug } = await params
     const supabase = await createClient()
 
     const { data: property } = await supabase
@@ -22,7 +23,7 @@ export default async function PropertyDetailPage({
       property_images (*),
       profiles (full_name, avatar_url)
     `)
-        .eq('slug', params.slug)
+        .eq('slug', slug)
         .single()
 
     if (!property) {
