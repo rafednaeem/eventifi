@@ -1,15 +1,16 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, use } from 'react'
 import { login } from './actions'
-import { Button, Input, Label } from '@/components/ui'
+import { Button, Input, Label, PasswordInput } from '@/components/ui'
 
 export default function LoginPage({
     searchParams,
 }: {
-    searchParams: { message: string }
+    searchParams: Promise<{ message: string }>
 }) {
+    const resolvedParams = use(searchParams)
     const [error, setError] = useState<string | null>(null)
 
     async function handleSubmit(formData: FormData) {
@@ -32,9 +33,9 @@ export default function LoginPage({
                         {error}
                     </div>
                 )}
-                {searchParams?.message && (
+                {resolvedParams?.message && (
                     <div className="rounded-md bg-primary/10 p-3 text-sm text-primary font-medium">
-                        {searchParams.message}
+                        {resolvedParams.message}
                     </div>
                 )}
 
@@ -45,7 +46,7 @@ export default function LoginPage({
 
                 <div className="space-y-2">
                     <Label htmlFor="password">Password</Label>
-                    <Input id="password" name="password" type="password" required />
+                    <PasswordInput id="password" name="password" required />
                 </div>
 
                 <Button type="submit" className="w-full">
