@@ -143,7 +143,7 @@ export default async function ServiceDetailPage({
                             <div className="grid gap-6 md:grid-cols-2">
                                 <div className="p-8 rounded-3xl bg-zinc-50 dark:bg-zinc-900 border border-border">
                                     <h3 className="font-bold flex items-center gap-2 mb-4">
-                                        <Info className="h-4 w-4 text-primary" /> What's Included
+                                        <Info className="h-4 w-4 text-primary" /> What&apos;s Included
                                     </h3>
                                     <ul className="space-y-3 text-sm">
                                         <li className="flex items-center gap-3">
