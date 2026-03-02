@@ -102,7 +102,7 @@ export function ServiceInquiryForm({ serviceId, priceMin }: ServiceInquiryFormPr
                 </Button>
 
                 <p className="text-[10px] text-center text-muted-foreground mt-4 px-4">
-                    By sending, you agree to Eventifi's service matching terms. Vendors typically respond within 2-4 hours.
+                    By sending, you agree to Eventifi&apos;s service matching terms. Vendors typically respond within 2-4 hours.
                 </p>
             </form>
         </div>
