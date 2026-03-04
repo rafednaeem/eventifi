@@ -12,7 +12,7 @@ export function cn(...inputs: ClassValue[]) {
 /** Standard Button Component */
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive';
-    size?: 'sm' | 'md' | 'lg';
+    size?: 'sm' | 'md' | 'lg' | 'icon';
     isLoading?: boolean;
 }
 
@@ -40,6 +40,7 @@ export function Button({
         sm: "h-9 px-3 text-sm",
         md: "h-10 px-4 py-2",
         lg: "h-11 px-8 text-lg",
+        icon: "h-10 w-10",
     };
 
     return (
