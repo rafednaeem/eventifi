@@ -260,14 +260,26 @@ export default async function ListingDetailPage({
                                         </div>
 
                                         <div className="space-y-4 mb-8">
-                                            <Button className="w-full h-16 rounded-[1.25rem] bg-orange-600 hover:bg-orange-700 text-white font-black text-lg shadow-xl shadow-orange-500/30 transition-all hover:-translate-y-1 active:scale-95 gap-3">
-                                                <Calendar className="w-5 h-5" />
-                                                Book This {isVenue ? 'Venue' : 'Service'}
-                                            </Button>
-                                            <Button variant="outline" className="w-full h-16 rounded-[1.25rem] border-slate-200 text-slate-800 font-black text-lg hover:bg-slate-50 transition-all gap-3">
-                                                <MessageSquare className="w-5 h-5" />
-                                                Send Inquiry
-                                            </Button>
+                                            <Link href={`/book/${listing.slug}`} className="w-full">
+                                                <Button className="w-full h-16 rounded-[1.25rem] bg-orange-600 hover:bg-orange-700 text-white font-black text-lg shadow-xl shadow-orange-500/30 transition-all hover:-translate-y-1 active:scale-95 gap-3">
+                                                    <Calendar className="w-5 h-5" />
+                                                    Book This {isVenue ? 'Venue' : 'Service'}
+                                                </Button>
+                                            </Link>
+                                            {listing.phone_number && (
+                                                <a href={`tel:${listing.phone_number}`} className="w-full">
+                                                    <Button variant="outline" className="w-full h-16 rounded-[1.25rem] border-slate-200 text-slate-800 font-black text-lg hover:bg-slate-50 transition-all gap-3">
+                                                        <Phone className="w-5 h-5" />
+                                                        Call to Book
+                                                    </Button>
+                                                </a>
+                                            )}
+                                            <Link href={`/book/${listing.slug}`} className="w-full">
+                                                <Button variant="ghost" className="w-full h-12 rounded-[1rem] text-slate-500 font-bold hover:bg-slate-50 transition-all gap-2">
+                                                    <MessageSquare className="w-4 h-4" />
+                                                    Send Inquiry
+                                                </Button>
+                                            </Link>
                                         </div>
 
                                         {/* Social & Contact Links */}

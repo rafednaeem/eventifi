@@ -31,10 +31,10 @@ export default async function OwnerBookingsPage({
             .select(`
                 id, status, guest_name, guest_email, guest_phone,
                 event_date, event_type, guest_count, message, created_at,
-                property_id, service_id
+                property_id, service_id, listing_id
             `)
             .or(
-                `property_id.in.(${listingIds.join(',')}),service_id.in.(${listingIds.join(',')})`
+                `property_id.in.(${listingIds.join(',')}),service_id.in.(${listingIds.join(',')}),listing_id.in.(${listingIds.join(',')})`
             )
             .order('created_at', { ascending: false })
         ).data ?? []
@@ -70,12 +70,14 @@ export default async function OwnerBookingsPage({
     // Attach listing info to each inquiry
     const enrichedInquiries = inquiries.map(inq => ({
         ...inq,
-        listing: inq.property_id
-            ? listingMap[inq.property_id]
-            : inq.service_id
-                ? listingMap[inq.service_id]
-                : null,
-        listingId: inq.property_id || inq.service_id || null,
+        listing: inq.listing_id
+            ? listingMap[inq.listing_id]
+            : inq.property_id
+                ? listingMap[inq.property_id]
+                : inq.service_id
+                    ? listingMap[inq.service_id]
+                    : null,
+        listingId: inq.listing_id || inq.property_id || inq.service_id || null,
     }))
 
     return (

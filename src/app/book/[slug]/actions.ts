@@ -28,27 +28,11 @@ export async function submitInquiry(formData: FormData) {
         guest_count: guestCount,
         message,
         status: 'new',
+        listing_id: listingId, // Use the unified ID
     }
 
     if (user) {
         insertPayload.user_id = user.id
-    }
-
-    if (listingType === 'venue') {
-        // Try to link to the properties table if we can find a matching property
-        const { data: prop } = await supabase
-            .from('properties')
-            .select('id')
-            .eq('id', listingId)
-            .single()
-        if (prop) insertPayload.property_id = prop.id
-    } else if (listingType === 'service') {
-        const { data: svc } = await supabase
-            .from('services')
-            .select('id')
-            .eq('id', listingId)
-            .single()
-        if (svc) insertPayload.service_id = svc.id
     }
 
     const { error } = await supabase.from('inquiries').insert(insertPayload)
