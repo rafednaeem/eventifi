@@ -72,7 +72,7 @@ export default async function SearchPage({
 
             <main className="flex-1 bg-background">
                 {/* Search Header */}
-                <section className="bg-card border-b border-border py-8 pt-24 text-slate-900">
+                <section className="bg-card border-b border-border py-8 pt-24 text-foreground">
                     <div className="container px-4 sm:px-8 max-w-7xl mx-auto">
                         <h1 className="text-3xl font-bold mb-8">Discover Venues & Services</h1>
 

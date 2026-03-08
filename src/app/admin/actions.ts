@@ -6,6 +6,12 @@ import { revalidatePath } from 'next/cache'
 export async function updateListingStatus(id: string, status: 'approved' | 'rejected' | 'pending') {
     const supabase = await createClient()
 
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) throw new Error('Not authenticated')
+
+    const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single()
+    if (profile?.role !== 'admin') throw new Error('Unauthorized: Admin access required.')
+
     const { error } = await supabase
         .from('listings')
         .update({ status })
@@ -20,6 +26,12 @@ export async function updateListingStatus(id: string, status: 'approved' | 'reje
 export async function toggleListingVerification(id: string, is_verified: boolean) {
     const supabase = await createClient()
 
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) throw new Error('Not authenticated')
+
+    const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single()
+    if (profile?.role !== 'admin') throw new Error('Unauthorized: Admin access required.')
+
     const { error } = await supabase
         .from('listings')
         .update({ is_verified })
@@ -33,6 +45,12 @@ export async function toggleListingVerification(id: string, is_verified: boolean
 export async function toggleListingFeatured(id: string, is_featured: boolean) {
     const supabase = await createClient()
 
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) throw new Error('Not authenticated')
+
+    const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single()
+    if (profile?.role !== 'admin') throw new Error('Unauthorized: Admin access required.')
+
     const { error } = await supabase
         .from('listings')
         .update({ is_featured })
@@ -45,6 +63,12 @@ export async function toggleListingFeatured(id: string, is_featured: boolean) {
 
 export async function deleteListing(id: string) {
     const supabase = await createClient()
+
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) throw new Error('Not authenticated')
+
+    const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single()
+    if (profile?.role !== 'admin') throw new Error('Unauthorized: Admin access required.')
 
     // Delete listing (cascades should handle sub-tables)
     const { error } = await supabase
@@ -88,25 +112,6 @@ export async function upsertListing(data: any) {
                 ...venue_details
             })
         if (vErr) throw new Error(`Venue error: ${vErr.message}`)
-
-        // SYNC TO LEGACY
-        await supabase.from('properties').upsert({
-            owner_id: user.id,
-            category_id: listingData.category_id,
-            name: listingData.title,
-            slug: listingData.slug,
-            description: listingData.description,
-            city_id: listingData.city_id,
-            address: listingData.address,
-            capacity_min: venue_details.capacity_min,
-            capacity_max: venue_details.capacity_max,
-            price_min: listingData.base_price,
-            cover_image_url: listingData.cover_image_url,
-            status: listingData.status || 'approved',
-            is_active: true,
-            is_verified: true
-        }, { onConflict: 'slug' })
-
     } else if (listing.type === 'service' && service_details) {
         const { error: sErr } = await supabase
             .from('listing_services')
@@ -115,21 +120,6 @@ export async function upsertListing(data: any) {
                 ...service_details
             })
         if (sErr) throw new Error(`Service error: ${sErr.message}`)
-
-        // SYNC TO LEGACY
-        await supabase.from('services').upsert({
-            provider_id: user.id,
-            category_id: listingData.category_id,
-            name: listingData.title,
-            slug: listingData.slug,
-            description: listingData.description,
-            city_id: listingData.city_id,
-            price_min: listingData.base_price,
-            cover_image_url: listingData.cover_image_url,
-            status: listingData.status || 'approved',
-            is_active: true,
-            is_verified: true
-        }, { onConflict: 'slug' })
     }
 
     revalidatePath('/admin/listings')

@@ -13,13 +13,14 @@ export default async function MyServicesPage() {
     }
 
     const { data: services } = await supabase
-        .from('services')
+        .from('listings')
         .select(`
             *,
-            service_categories (name),
+            listing_services (service_area, packages),
             cities (name)
         `)
-        .eq('provider_id', user.id)
+        .eq('owner_id', user.id)
+        .eq('type', 'service')
         .order('created_at', { ascending: false })
 
     return (
@@ -56,7 +57,7 @@ export default async function MyServicesPage() {
                             <div className="relative aspect-video overflow-hidden">
                                 <img
                                     src={service.cover_image_url || 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30'}
-                                    alt={service.name}
+                                    alt={service.title}
                                     className="h-full w-full object-cover transition-transform group-hover:scale-105"
                                 />
                                 <div className="absolute top-3 right-3">
@@ -71,9 +72,9 @@ export default async function MyServicesPage() {
 
                             <div className="p-5 space-y-3">
                                 <div className="flex items-center gap-2 text-[10px] font-bold text-primary uppercase tracking-widest leading-none">
-                                    {service.service_categories?.name}
+                                    {service.type}
                                 </div>
-                                <h3 className="font-bold text-lg truncate">{service.name}</h3>
+                                <h3 className="font-bold text-lg truncate">{service.title}</h3>
 
                                 <div className="flex items-center gap-4 text-xs text-muted-foreground">
                                     <div className="flex items-center gap-1">
@@ -89,7 +90,7 @@ export default async function MyServicesPage() {
                                 <div className="pt-4 border-t border-border flex items-center justify-between">
                                     <div className="text-sm">
                                         <span className="text-muted-foreground">Starting</span>
-                                        <p className="font-bold text-primary">PKR {service.price_min?.toLocaleString()}</p>
+                                        <p className="font-bold text-primary">PKR {service.base_price?.toLocaleString()}</p>
                                     </div>
                                     <div className="flex gap-2">
                                         <Button variant="ghost" size="sm" className="h-8 w-8">

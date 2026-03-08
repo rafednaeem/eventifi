@@ -136,7 +136,7 @@ export default async function ListingDetailPage({
                                                 <Users className="h-5 w-5" />
                                                 <span className="text-[10px] font-black uppercase tracking-widest">Capacity</span>
                                             </div>
-                                            <p className="text-xl font-black text-slate-900">{venueData?.capacity_max} Max</p>
+                                            <p className="text-xl font-black text-slate-900">{venueData?.capacity_min || 0} - {venueData?.capacity_max || 'N/A'} Max</p>
                                         </div>
                                         <div className="flex flex-col gap-2">
                                             <div className="flex items-center gap-2 text-indigo-500">
@@ -169,7 +169,7 @@ export default async function ListingDetailPage({
                                         <ShieldCheck className="h-5 w-5" />
                                         <span className="text-[10px] font-black uppercase tracking-widest">Verified</span>
                                     </div>
-                                    <p className="text-xl font-black text-slate-900">Partner</p>
+                                    <p className="text-xl font-black text-slate-900">{listing.is_verified ? 'Verified Partner' : 'Under Review'}</p>
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <div className="flex items-center gap-2 text-amber-500">

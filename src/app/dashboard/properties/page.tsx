@@ -13,13 +13,14 @@ export default async function PropertiesPage() {
     }
 
     const { data: properties } = await supabase
-        .from('properties')
+        .from('listings')
         .select(`
       *,
-      property_categories (name),
+      listing_venues (capacity_min, capacity_max),
       cities (name)
     `)
         .eq('owner_id', user.id)
+        .eq('type', 'venue')
         .order('created_at', { ascending: false })
 
     return (
@@ -84,10 +85,10 @@ export default async function PropertiesPage() {
                                 <div className="flex items-start justify-between">
                                     <div>
                                         <p className="text-xs font-bold text-primary uppercase tracking-widest">
-                                            {property.property_categories?.name}
+                                            {property.type}
                                         </p>
                                         <h2 className="text-xl font-bold mt-1 group-hover:text-primary transition-colors">
-                                            {property.name}
+                                            {property.title}
                                         </h2>
                                         <div className="flex items-center mt-2 text-sm text-muted-foreground">
                                             <MapPin className="mr-1 h-3 w-3" />
@@ -113,11 +114,11 @@ export default async function PropertiesPage() {
                                     <div className="flex gap-4">
                                         <div>
                                             <p className="text-[10px] text-muted-foreground uppercase font-bold">Capacity</p>
-                                            <p className="text-sm font-semibold">{property.capacity_min}-{property.capacity_max}</p>
+                                            <p className="text-sm font-semibold">{property.listing_venues?.capacity_min || 0}-{property.listing_venues?.capacity_max || 'N/A'}</p>
                                         </div>
                                         <div>
-                                            <p className="text-[10px] text-muted-foreground uppercase font-bold">Price Range</p>
-                                            <p className="text-sm font-semibold">PKR {property.price_min?.toLocaleString()} - {property.price_max?.toLocaleString()}</p>
+                                            <p className="text-[10px] text-muted-foreground uppercase font-bold">Base Price</p>
+                                            <p className="text-sm font-semibold">PKR {property.base_price?.toLocaleString()}</p>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-2">

@@ -6,6 +6,7 @@ import { createClient } from '@/lib/supabase/client'
 import { Button, Input, Label } from '@/components/ui'
 import { ShieldCheck, CreditCard, ChevronRight, MapPin, Calendar, Clock, Lock } from 'lucide-react'
 import Link from 'next/link'
+import { createMockBooking } from './actions'
 
 export default function CheckoutPage() {
     // In a real flow, this would read from a global Cart state or query params.
@@ -29,13 +30,20 @@ export default function CheckoutPage() {
         e.preventDefault()
         setIsProcessing(true)
 
-        // Mock payment delay
-        await new Promise(r => setTimeout(r, 2000))
+        try {
+            // Mock payment delay
+            await new Promise(r => setTimeout(r, 2000))
 
-        // Here we would insert into `bookings` and `booking_items` via Supabase
+            // Insert into `bookings` and `booking_items` via Server Action
+            await createMockBooking(totalAmount, depositAmount)
 
-        setIsProcessing(false)
-        setIsSuccess(true)
+            setIsSuccess(true)
+        } catch (error) {
+            console.error(error)
+            alert('Failed to process booking. Are you logged in?')
+        } finally {
+            setIsProcessing(false)
+        }
     }
 
     if (isSuccess) {
