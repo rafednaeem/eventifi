@@ -84,10 +84,10 @@ export default async function ListingDetailPage({
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-3">
-                                    <Button variant="outline" className="rounded-2xl h-12 px-6 border-slate-200 text-slate-600 hover:bg-slate-50 font-bold gap-2">
+                                    <Button variant="outline" className="rounded-2xl h-12 px-6 border-slate-200 text-slate-600 hover:bg-slate-50 font-bold gap-2 active:scale-95">
                                         <Share2 className="h-4 w-4" /> Share
                                     </Button>
-                                    <Button variant="outline" className="rounded-2xl h-12 w-12 border-slate-200 text-slate-600 hover:bg-slate-50 font-bold">
+                                    <Button variant="outline" aria-label="Add to favorites" className="rounded-2xl h-12 w-12 border-slate-200 text-slate-600 hover:bg-slate-50 font-bold active:scale-95">
                                         <Heart className="h-5 w-5" />
                                     </Button>
                                 </div>
@@ -346,7 +346,7 @@ export default async function ListingDetailPage({
                                             <h4 className="text-xl font-bold">{listing.profiles?.full_name || 'EventiFi Partner'}</h4>
                                         </div>
                                     </div>
-                                    <p className="text-slate-400 text-sm italic mb-6">"Our team is dedicated to making your special moments unforgettable. We look forward to hosting you!"</p>
+                                    <p className="text-slate-400 text-sm italic mb-6">&quot;Our team is dedicated to making your special moments unforgettable. We look forward to hosting you!&quot;</p>
                                     <Button variant="outline" className="w-full rounded-xl border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white transition-all uppercase tracking-widest text-[10px] h-12">
                                         View Profile
                                     </Button>
