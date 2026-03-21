@@ -1,13 +1,13 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import {
-  Building, Camera, Heart, Music, Palette, Utensils, Waves, Trophy, Trees, Sparkles, Video, Truck, Users, Calendar, Home,
-  Menu, MapPin, Search, ArrowRight, Castle, Hotel, Tent
+  Building, Camera, Heart, Music, Palette as PaletteIcon, Utensils, Waves, Trophy, Trees, Sparkles, Video, Truck, Users, Calendar, Home,
+  Menu, MapPin, Search, ArrowRight, Castle, Hotel, Tent, LucideIcon
 } from 'lucide-react'
 
 // Icon mapping helper
-const icons: Record<string, any> = {
-  Building, Camera, Waves, Trophy, Trees, Utensils, Music, Palette, Video, Truck, Users, Calendar, Heart, Sparkles, Home, Castle, Hotel, Tent
+const icons: Record<string, LucideIcon> = {
+  Building, Camera, Waves, Trophy, Trees, Utensils, Music, Palette: PaletteIcon, Video, Truck, Users, Calendar, Heart, Sparkles, Home, Castle, Hotel, Tent
 }
 
 const fallbackImages = [
@@ -52,9 +52,12 @@ export default async function LandingPage() {
               </button>
             </div>
             {/* Mobile Menu Button */}
-            <div className="md:hidden text-slate-600">
+            <button
+              aria-label="Toggle menu"
+              className="md:hidden text-slate-600 p-2 hover:bg-slate-100 active:scale-95 transition-all rounded-lg"
+            >
               <Menu className="w-6 h-6" />
-            </div>
+            </button>
           </div>
         </div>
       </nav>
@@ -84,17 +87,17 @@ export default async function LandingPage() {
           </p>
 
           {/* Search Bar */}
-          <form action="/search" method="GET" className="bg-white p-2 rounded-2xl shadow-2xl max-w-4xl mx-auto flex flex-col md:flex-row gap-2 items-center transform hover:scale-[1.01] transition-transform duration-300">
-            <div className="flex-1 w-full flex items-center px-4 h-14 bg-gray-50 rounded-xl border border-transparent hover:border-orange-200 transition-colors">
+          <form action="/search" method="GET" className="bg-white p-2 rounded-2xl shadow-2xl max-w-4xl mx-auto flex flex-col md:flex-row gap-2 items-center transform hover:scale-[1.01] transition-transform duration-300 focus-within:ring-2 focus-within:ring-orange-500/20">
+            <div className="flex-1 w-full flex items-center px-4 h-14 bg-gray-50 rounded-xl border border-transparent hover:border-orange-200 focus-within:bg-white focus-within:border-orange-400 transition-colors">
               <MapPin className="text-orange-500 w-5 h-5 mr-3 shrink-0" />
-              <input type="text" name="city" placeholder="Location (e.g. Lahore)" className="bg-transparent w-full outline-none text-slate-700 placeholder-slate-400 font-medium" />
+              <input type="text" name="city" aria-label="Location" placeholder="Location (e.g. Lahore)" className="bg-transparent w-full outline-none text-slate-700 placeholder-slate-400 font-medium" />
             </div>
             <div className="hidden md:block w-px h-8 bg-gray-200"></div>
-            <div className="flex-1 w-full flex items-center px-4 h-14 bg-gray-50 rounded-xl border border-transparent hover:border-orange-200 transition-colors">
+            <div className="flex-1 w-full flex items-center px-4 h-14 bg-gray-50 rounded-xl border border-transparent hover:border-orange-200 focus-within:bg-white focus-within:border-orange-400 transition-colors">
               <Search className="text-orange-500 w-5 h-5 mr-3 shrink-0" />
-              <input type="text" name="q" placeholder="Search Venues or Services..." className="bg-transparent w-full outline-none text-slate-700 placeholder-slate-400 font-medium" />
+              <input type="text" name="q" aria-label="Search venues or services" placeholder="Search Venues or Services..." className="bg-transparent w-full outline-none text-slate-700 placeholder-slate-400 font-medium" />
             </div>
-            <button type="submit" className="w-full md:w-auto px-10 h-14 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-orange-500/30 flex items-center justify-center gap-2">
+            <button type="submit" className="w-full md:w-auto px-10 h-14 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold rounded-xl transition-all active:scale-95 shadow-lg shadow-orange-500/30 flex items-center justify-center gap-2">
               Search
             </button>
           </form>
@@ -119,7 +122,7 @@ export default async function LandingPage() {
               const Icon = icons[category.icon || 'Castle'] || Castle
               const imageSrc = fallbackImages[index % fallbackImages.length]
               return (
-                <Link href={`/properties/category/${category.slug}`} key={category.id} className="group relative h-96 rounded-[2rem] overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 block">
+                <Link href={`/properties/category/${category.slug}`} key={category.id} className="group relative h-96 rounded-[2rem] overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 active:scale-[0.99] block">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
                   <img src={imageSrc} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt={category.name} />
                   <div className="absolute bottom-0 left-0 p-8 z-20 w-full">
@@ -157,7 +160,7 @@ export default async function LandingPage() {
             {serviceCategories?.map((category) => {
               const Icon = icons[category.icon || 'Sparkles'] || Sparkles
               return (
-                <Link href={`/services/category/${category.slug}`} key={category.id} className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-3xl border border-slate-700 hover:border-orange-500/50 transition-all hover:bg-slate-800 group cursor-pointer block">
+                <Link href={`/services/category/${category.slug}`} key={category.id} className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-3xl border border-slate-700 hover:border-orange-500/50 transition-all hover:bg-slate-800 group cursor-pointer active:scale-[0.99] block">
                   <div className="w-14 h-14 bg-orange-500/10 text-orange-500 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-orange-500 group-hover:text-white transition-all">
                     <Icon className="w-7 h-7" />
                   </div>
