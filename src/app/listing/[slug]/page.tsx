@@ -87,7 +87,11 @@ export default async function ListingDetailPage({
                                     <Button variant="outline" className="rounded-2xl h-12 px-6 border-slate-200 text-slate-600 hover:bg-slate-50 font-bold gap-2">
                                         <Share2 className="h-4 w-4" /> Share
                                     </Button>
-                                    <Button variant="outline" className="rounded-2xl h-12 w-12 border-slate-200 text-slate-600 hover:bg-slate-50 font-bold">
+                                    <Button
+                                        variant="outline"
+                                        aria-label="Add to favorites"
+                                        className="rounded-2xl h-12 w-12 border-slate-200 text-slate-600 hover:bg-slate-50 font-bold transition-all active:scale-95"
+                                    >
                                         <Heart className="h-5 w-5" />
                                     </Button>
                                 </div>
@@ -227,7 +231,7 @@ export default async function ListingDetailPage({
                                         Service Packages
                                     </h2>
                                     <div className="grid gap-8">
-                                        {serviceData?.packages?.map((pkg: any, idx: number) => (
+                                        {serviceData?.packages?.map((pkg: { name: string; price: number; description: string }, idx: number) => (
                                             <div key={idx} className="group p-8 border border-slate-100 rounded-3xl hover:border-orange-200 hover:shadow-xl hover:shadow-orange-500/5 transition-all duration-300">
                                                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
                                                     <h3 className="text-2xl font-black text-slate-900 group-hover:text-orange-600 transition-colors uppercase tracking-tight">{pkg.name}</h3>
@@ -346,7 +350,7 @@ export default async function ListingDetailPage({
                                             <h4 className="text-xl font-bold">{listing.profiles?.full_name || 'EventiFi Partner'}</h4>
                                         </div>
                                     </div>
-                                    <p className="text-slate-400 text-sm italic mb-6">"Our team is dedicated to making your special moments unforgettable. We look forward to hosting you!"</p>
+                                    <p className="text-slate-400 text-sm italic mb-6">&quot;Our team is dedicated to making your special moments unforgettable. We look forward to hosting you!&quot;</p>
                                     <Button variant="outline" className="w-full rounded-xl border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white transition-all uppercase tracking-widest text-[10px] h-12">
                                         View Profile
                                     </Button>
