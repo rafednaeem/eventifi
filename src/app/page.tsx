@@ -2,11 +2,11 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import {
   Building, Camera, Heart, Music, Palette, Utensils, Waves, Trophy, Trees, Sparkles, Video, Truck, Users, Calendar, Home,
-  Menu, MapPin, Search, ArrowRight, Castle, Hotel, Tent
+  Menu, MapPin, Search, ArrowRight, Castle, Hotel, Tent, type LucideIcon
 } from 'lucide-react'
 
 // Icon mapping helper
-const icons: Record<string, any> = {
+const icons: Record<string, LucideIcon> = {
   Building, Camera, Waves, Trophy, Trees, Utensils, Music, Palette, Video, Truck, Users, Calendar, Heart, Sparkles, Home, Castle, Hotel, Tent
 }
 
@@ -52,9 +52,13 @@ export default async function LandingPage() {
               </button>
             </div>
             {/* Mobile Menu Button */}
-            <div className="md:hidden text-slate-600">
+            <button
+              type="button"
+              aria-label="Toggle menu"
+              className="md:hidden text-slate-600 p-2 rounded-lg hover:bg-slate-100 active:scale-95 transition-all"
+            >
               <Menu className="w-6 h-6" />
-            </div>
+            </button>
           </div>
         </div>
       </nav>
