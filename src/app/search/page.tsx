@@ -1,8 +1,7 @@
 import { Navbar } from '@/components/layout/navbar'
 import { createClient } from '@/lib/supabase/server'
 import { Button, Input, Label } from '@/components/ui'
-import Link from 'next/link'
-import { Search, MapPin, Building, Users, Filter, Sparkles, Tag } from 'lucide-react'
+import { Search, MapPin, Users, Filter, Tag } from 'lucide-react'
 import { ListingCard } from '@/components/listings/listing-card'
 
 export default async function SearchPage({
@@ -137,7 +136,7 @@ export default async function SearchPage({
                                 />
                             </div>
 
-                            <Button type="submit" className="w-full gap-2 bg-orange-600 hover:bg-orange-700 text-white">
+                            <Button type="submit" className="w-full gap-2 bg-orange-600 hover:bg-orange-700 text-white active:scale-[0.98]">
                                 <Search className="h-4 w-4" />
                                 Search
                             </Button>
@@ -168,7 +167,7 @@ export default async function SearchPage({
                     ) : (
                         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                             {filteredListings.map((listing) => (
-                                <ListingCard key={listing.id} listing={listing as any} />
+                                <ListingCard key={listing.id} listing={listing as unknown as Parameters<typeof ListingCard>[0]['listing']} />
                             ))}
                         </div>
                     )}
