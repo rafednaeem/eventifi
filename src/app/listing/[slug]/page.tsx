@@ -79,16 +79,20 @@ export default async function ListingDetailPage({
                                         {listing.title}
                                     </h1>
                                     <div className="flex items-center mt-4 text-slate-500 font-medium">
-                                        <MapPin className="h-5 w-5 mr-2 text-orange-500" />
+                                        <MapPin className="h-5 w-5 mr-2 text-orange-500" aria-hidden="true" />
                                         <span className="text-lg">{listing.address}, {listing.cities?.name}</span>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-3">
-                                    <Button variant="outline" className="rounded-2xl h-12 px-6 border-slate-200 text-slate-600 hover:bg-slate-50 font-bold gap-2">
-                                        <Share2 className="h-4 w-4" /> Share
+                                    <Button variant="outline" className="rounded-2xl h-12 px-6 border-slate-200 text-slate-600 hover:bg-slate-50 font-bold gap-2 active:scale-95">
+                                        <Share2 className="h-4 w-4" aria-hidden="true" /> Share
                                     </Button>
-                                    <Button variant="outline" className="rounded-2xl h-12 w-12 border-slate-200 text-slate-600 hover:bg-slate-50 font-bold">
-                                        <Heart className="h-5 w-5" />
+                                    <Button
+                                        variant="outline"
+                                        className="rounded-2xl h-12 w-12 border-slate-200 text-slate-600 hover:bg-slate-50 font-bold active:scale-95"
+                                        aria-label="Add to favorites"
+                                    >
+                                        <Heart className="h-5 w-5" aria-hidden="true" />
                                     </Button>
                                 </div>
                             </div>
@@ -133,14 +137,14 @@ export default async function ListingDetailPage({
                                     <>
                                         <div className="flex flex-col gap-2">
                                             <div className="flex items-center gap-2 text-orange-500">
-                                                <Users className="h-5 w-5" />
+                                                <Users className="h-5 w-5" aria-hidden="true" />
                                                 <span className="text-[10px] font-black uppercase tracking-widest">Capacity</span>
                                             </div>
                                             <p className="text-xl font-black text-slate-900">{venueData?.capacity_min || 0} - {venueData?.capacity_max || 'N/A'} Max</p>
                                         </div>
                                         <div className="flex flex-col gap-2">
                                             <div className="flex items-center gap-2 text-indigo-500">
-                                                <Building className="h-5 w-5" />
+                                                <Building className="h-5 w-5" aria-hidden="true" />
                                                 <span className="text-[10px] font-black uppercase tracking-widest">Space</span>
                                             </div>
                                             <p className="text-xl font-black text-slate-900 capitalize">{venueData?.indoor_outdoor}</p>
@@ -150,14 +154,14 @@ export default async function ListingDetailPage({
                                     <>
                                         <div className="flex flex-col gap-2">
                                             <div className="flex items-center gap-2 text-orange-500">
-                                                <Sparkles className="h-5 w-5" />
+                                                <Sparkles className="h-5 w-5" aria-hidden="true" />
                                                 <span className="text-[10px] font-black uppercase tracking-widest">Type</span>
                                             </div>
                                             <p className="text-xl font-black text-slate-900 capitalize">{listing.type}</p>
                                         </div>
                                         <div className="flex flex-col gap-2">
                                             <div className="flex items-center gap-2 text-indigo-500">
-                                                <Tag className="h-5 w-5" />
+                                                <Tag className="h-5 w-5" aria-hidden="true" />
                                                 <span className="text-[10px] font-black uppercase tracking-widest">Packages</span>
                                             </div>
                                             <p className="text-xl font-black text-slate-900">{serviceData?.packages?.length || 0} Options</p>
@@ -166,14 +170,14 @@ export default async function ListingDetailPage({
                                 )}
                                 <div className="flex flex-col gap-2">
                                     <div className="flex items-center gap-2 text-emerald-500">
-                                        <ShieldCheck className="h-5 w-5" />
+                                        <ShieldCheck className="h-5 w-5" aria-hidden="true" />
                                         <span className="text-[10px] font-black uppercase tracking-widest">Verified</span>
                                     </div>
                                     <p className="text-xl font-black text-slate-900">{listing.is_verified ? 'Verified Partner' : 'Under Review'}</p>
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <div className="flex items-center gap-2 text-amber-500">
-                                        <Calendar className="h-5 w-5" />
+                                        <Calendar className="h-5 w-5" aria-hidden="true" />
                                         <span className="text-[10px] font-black uppercase tracking-widest">Booking</span>
                                     </div>
                                     <p className="text-xl font-black text-slate-900">Open</p>
@@ -192,7 +196,7 @@ export default async function ListingDetailPage({
                             {isVenue ? (
                                 <div className="bg-slate-900 p-10 md:p-12 rounded-[3rem] text-white shadow-xl shadow-slate-200">
                                     <h2 className="text-3xl font-black mb-10 uppercase tracking-tight flex items-center gap-4">
-                                        <Building className="w-8 h-8 text-orange-500" />
+                                        <Building className="w-8 h-8 text-orange-500" aria-hidden="true" />
                                         Venue Amenities
                                     </h2>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -201,7 +205,7 @@ export default async function ListingDetailPage({
                                             <ul className="space-y-4">
                                                 {['Generators / UPS Backup', 'Dedicated Parking Staff', 'Air Conditioning', 'VIP Lounges'].map((item) => (
                                                     <li key={item} className="flex items-center gap-3 text-slate-300">
-                                                        <CheckCircle2 className="h-5 w-5 text-emerald-500" />
+                                                        <CheckCircle2 className="h-5 w-5 text-emerald-500" aria-hidden="true" />
                                                         {item}
                                                     </li>
                                                 ))}
@@ -212,7 +216,7 @@ export default async function ListingDetailPage({
                                             <ul className="space-y-4">
                                                 {['Music allowed until 11 PM', 'External catering allowed', 'Fireworks prohibited', 'Parking for 50+ cars'].map((item) => (
                                                     <li key={item} className="flex items-center gap-3 text-slate-300">
-                                                        <Info className="h-5 w-5 text-blue-500" />
+                                                        <Info className="h-5 w-5 text-blue-500" aria-hidden="true" />
                                                         {item}
                                                     </li>
                                                 ))}
@@ -223,11 +227,11 @@ export default async function ListingDetailPage({
                             ) : (
                                 <div className="bg-white p-10 md:p-12 border border-slate-100 rounded-[3rem] shadow-sm">
                                     <h2 className="text-3xl font-black text-slate-900 mb-10 uppercase tracking-tight flex items-center gap-4">
-                                        <Sparkles className="w-8 h-8 text-orange-500" />
+                                        <Sparkles className="w-8 h-8 text-orange-500" aria-hidden="true" />
                                         Service Packages
                                     </h2>
                                     <div className="grid gap-8">
-                                        {serviceData?.packages?.map((pkg: any, idx: number) => (
+                                        {serviceData?.packages?.map((pkg: { name: string; price: number; description: string }, idx: number) => (
                                             <div key={idx} className="group p-8 border border-slate-100 rounded-3xl hover:border-orange-200 hover:shadow-xl hover:shadow-orange-500/5 transition-all duration-300">
                                                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
                                                     <h3 className="text-2xl font-black text-slate-900 group-hover:text-orange-600 transition-colors uppercase tracking-tight">{pkg.name}</h3>
@@ -262,21 +266,21 @@ export default async function ListingDetailPage({
                                         <div className="space-y-4 mb-8">
                                             <Link href={`/book/${listing.slug}`} className="w-full">
                                                 <Button className="w-full h-16 rounded-[1.25rem] bg-orange-600 hover:bg-orange-700 text-white font-black text-lg shadow-xl shadow-orange-500/30 transition-all hover:-translate-y-1 active:scale-95 gap-3">
-                                                    <Calendar className="w-5 h-5" />
+                                                    <Calendar className="w-5 h-5" aria-hidden="true" />
                                                     Book This {isVenue ? 'Venue' : 'Service'}
                                                 </Button>
                                             </Link>
                                             {listing.phone_number && (
                                                 <a href={`tel:${listing.phone_number}`} className="w-full">
-                                                    <Button variant="outline" className="w-full h-16 rounded-[1.25rem] border-slate-200 text-slate-800 font-black text-lg hover:bg-slate-50 transition-all gap-3">
-                                                        <Phone className="w-5 h-5" />
+                                                    <Button variant="outline" className="w-full h-16 rounded-[1.25rem] border-slate-200 text-slate-800 font-black text-lg hover:bg-slate-50 transition-all gap-3 active:scale-95">
+                                                        <Phone className="w-5 h-5" aria-hidden="true" />
                                                         Call to Book
                                                     </Button>
                                                 </a>
                                             )}
                                             <Link href={`/book/${listing.slug}`} className="w-full">
-                                                <Button variant="ghost" className="w-full h-12 rounded-[1rem] text-slate-500 font-bold hover:bg-slate-50 transition-all gap-2">
-                                                    <MessageSquare className="w-4 h-4" />
+                                                <Button variant="ghost" className="w-full h-12 rounded-[1rem] text-slate-500 font-bold hover:bg-slate-50 transition-all gap-2 active:scale-95">
+                                                    <MessageSquare className="w-4 h-4" aria-hidden="true" />
                                                     Send Inquiry
                                                 </Button>
                                             </Link>
@@ -287,9 +291,9 @@ export default async function ListingDetailPage({
                                             <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Direct Contact</p>
 
                                             {listing.whatsapp_number && (
-                                                <a href={`https://wa.me/${listing.whatsapp_number}`} target="_blank" className="flex items-center gap-4 p-4 rounded-2xl border border-emerald-50 bg-emerald-50/10 text-emerald-700 hover:bg-emerald-50 transition-colors group">
+                                                <a href={`https://wa.me/${listing.whatsapp_number}`} target="_blank" className="flex items-center gap-4 p-4 rounded-2xl border border-emerald-50 bg-emerald-50/10 text-emerald-700 hover:bg-emerald-50 transition-colors group active:scale-[0.98]">
                                                     <div className="h-10 w-10 flex items-center justify-center bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-500/20 group-hover:scale-110 transition-transform">
-                                                        <MessageCircle className="h-5 w-5" />
+                                                        <MessageCircle className="h-5 w-5" aria-hidden="true" />
                                                     </div>
                                                     <div>
                                                         <span className="text-[10px] font-black uppercase tracking-widest block opacity-60">WhatsApp</span>
@@ -300,14 +304,14 @@ export default async function ListingDetailPage({
 
                                             <div className="grid grid-cols-2 gap-3">
                                                 {listing.phone_number && (
-                                                    <a href={`tel:${listing.phone_number}`} className="flex flex-col gap-2 p-4 rounded-2xl border border-slate-100 hover:bg-slate-50 transition-colors group">
-                                                        <Phone className="h-5 w-5 text-indigo-500 group-hover:scale-110 transition-transform" />
+                                                    <a href={`tel:${listing.phone_number}`} className="flex flex-col gap-2 p-4 rounded-2xl border border-slate-100 hover:bg-slate-50 transition-colors group active:scale-[0.98]">
+                                                        <Phone className="h-5 w-5 text-indigo-500 group-hover:scale-110 transition-transform" aria-hidden="true" />
                                                         <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Call Now</span>
                                                     </a>
                                                 )}
                                                 {listing.website_url && (
-                                                    <a href={listing.website_url} target="_blank" className="flex flex-col gap-2 p-4 rounded-2xl border border-slate-100 hover:bg-slate-50 transition-colors group">
-                                                        <Globe className="h-5 w-5 text-blue-500 group-hover:scale-110 transition-transform" />
+                                                    <a href={listing.website_url} target="_blank" className="flex flex-col gap-2 p-4 rounded-2xl border border-slate-100 hover:bg-slate-50 transition-colors group active:scale-[0.98]">
+                                                        <Globe className="h-5 w-5 text-blue-500 group-hover:scale-110 transition-transform" aria-hidden="true" />
                                                         <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Website</span>
                                                     </a>
                                                 )}
@@ -315,14 +319,14 @@ export default async function ListingDetailPage({
 
                                             <div className="grid grid-cols-2 gap-3">
                                                 {listing.instagram_url && (
-                                                    <a href={listing.instagram_url} target="_blank" className="flex flex-col gap-2 p-4 rounded-2xl border border-slate-100 hover:bg-slate-50 transition-colors group">
-                                                        <Instagram className="h-5 w-5 text-pink-600 group-hover:scale-110 transition-transform" />
+                                                    <a href={listing.instagram_url} target="_blank" className="flex flex-col gap-2 p-4 rounded-2xl border border-slate-100 hover:bg-slate-50 transition-colors group active:scale-[0.98]">
+                                                        <Instagram className="h-5 w-5 text-pink-600 group-hover:scale-110 transition-transform" aria-hidden="true" />
                                                         <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Instagram</span>
                                                     </a>
                                                 )}
                                                 {listing.facebook_url && (
-                                                    <a href={listing.facebook_url} target="_blank" className="flex flex-col gap-2 p-4 rounded-2xl border border-slate-100 hover:bg-slate-50 transition-colors group">
-                                                        <Facebook className="h-5 w-5 text-blue-700 group-hover:scale-110 transition-transform" />
+                                                    <a href={listing.facebook_url} target="_blank" className="flex flex-col gap-2 p-4 rounded-2xl border border-slate-100 hover:bg-slate-50 transition-colors group active:scale-[0.98]">
+                                                        <Facebook className="h-5 w-5 text-blue-700 group-hover:scale-110 transition-transform" aria-hidden="true" />
                                                         <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Facebook</span>
                                                     </a>
                                                 )}
@@ -346,7 +350,7 @@ export default async function ListingDetailPage({
                                             <h4 className="text-xl font-bold">{listing.profiles?.full_name || 'EventiFi Partner'}</h4>
                                         </div>
                                     </div>
-                                    <p className="text-slate-400 text-sm italic mb-6">"Our team is dedicated to making your special moments unforgettable. We look forward to hosting you!"</p>
+                                    <p className="text-slate-400 text-sm italic mb-6">&quot;Our team is dedicated to making your special moments unforgettable. We look forward to hosting you!&quot;</p>
                                     <Button variant="outline" className="w-full rounded-xl border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white transition-all uppercase tracking-widest text-[10px] h-12">
                                         View Profile
                                     </Button>

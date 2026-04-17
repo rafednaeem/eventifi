@@ -1,9 +1,8 @@
 import { Navbar } from '@/components/layout/navbar'
 import { createClient } from '@/lib/supabase/server'
 import { Button, Input, Label } from '@/components/ui'
-import Link from 'next/link'
-import { Search, MapPin, Building, Users, Filter, Sparkles, Tag } from 'lucide-react'
-import { ListingCard } from '@/components/listings/listing-card'
+import { Search, MapPin, Users, Filter, Tag } from 'lucide-react'
+import { ListingCard, type ListingCardProps } from '@/components/listings/listing-card'
 
 export default async function SearchPage({
     searchParams,
@@ -80,7 +79,7 @@ export default async function SearchPage({
                             <div className="space-y-2">
                                 <Label htmlFor="city" className="text-xs font-bold text-slate-500 uppercase">City</Label>
                                 <div className="relative">
-                                    <MapPin className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                                    <MapPin className="absolute left-3 top-3 h-4 w-4 text-slate-400" aria-hidden="true" />
                                     <select
                                         id="city"
                                         name="city"
@@ -96,7 +95,7 @@ export default async function SearchPage({
                             <div className="space-y-2">
                                 <Label htmlFor="type" className="text-xs font-bold text-slate-500 uppercase">Looking For</Label>
                                 <div className="relative">
-                                    <Tag className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                                    <Tag className="absolute left-3 top-3 h-4 w-4 text-slate-400" aria-hidden="true" />
                                     <select
                                         id="type"
                                         name="type"
@@ -113,7 +112,7 @@ export default async function SearchPage({
                             <div className="space-y-2">
                                 <Label htmlFor="guests" className="text-xs font-bold text-slate-500 uppercase">Min Guests</Label>
                                 <div className="relative">
-                                    <Users className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                                    <Users className="absolute left-3 top-3 h-4 w-4 text-slate-400" aria-hidden="true" />
                                     <Input
                                         id="guests"
                                         name="guests"
@@ -137,8 +136,8 @@ export default async function SearchPage({
                                 />
                             </div>
 
-                            <Button type="submit" className="w-full gap-2 bg-orange-600 hover:bg-orange-700 text-white">
-                                <Search className="h-4 w-4" />
+                            <Button type="submit" className="w-full gap-2 bg-orange-600 hover:bg-orange-700 text-white active:scale-[0.98]">
+                                <Search className="h-4 w-4" aria-hidden="true" />
                                 Search
                             </Button>
                         </form>
@@ -151,15 +150,15 @@ export default async function SearchPage({
                         <p className="text-sm text-slate-500">
                             Showing <span className="font-bold text-slate-900">{filteredListings?.length || 0}</span> results found
                         </p>
-                        <Button variant="outline" size="sm" className="gap-2">
-                            <Filter className="h-4 w-4" />
+                        <Button variant="outline" size="sm" className="gap-2 active:scale-95">
+                            <Filter className="h-4 w-4" aria-hidden="true" />
                             Filters
                         </Button>
                     </div>
 
                     {!filteredListings || filteredListings.length === 0 ? (
                         <div className="text-center py-20 bg-white rounded-2xl border border-slate-200">
-                            <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4" aria-hidden="true">
                                 <Search className="h-8 w-8 text-slate-400" />
                             </div>
                             <h3 className="text-lg font-bold text-slate-900 mb-2">No listings found</h3>
@@ -168,7 +167,7 @@ export default async function SearchPage({
                     ) : (
                         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                             {filteredListings.map((listing) => (
-                                <ListingCard key={listing.id} listing={listing as any} />
+                                <ListingCard key={listing.id} listing={listing as ListingCardProps['listing']} />
                             ))}
                         </div>
                     )}

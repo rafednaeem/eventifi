@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { MapPin, Building, Users, Sparkles, Tag } from 'lucide-react'
 
-interface ListingCardProps {
+export interface ListingCardProps {
     listing: {
         id: string
         slug: string
@@ -19,7 +19,7 @@ export function ListingCard({ listing }: ListingCardProps) {
     return (
         <Link
             href={`/listing/${listing.slug}`}
-            className="group flex flex-col bg-white rounded-3xl border border-slate-200 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 block"
+            className="group flex flex-col bg-white rounded-3xl border border-slate-200 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 block active:scale-[0.99]"
         >
             <div className="aspect-[4/3] relative bg-slate-100 overflow-hidden">
                 {listing.cover_image_url ? (
@@ -31,8 +31,8 @@ export function ListingCard({ listing }: ListingCardProps) {
                 ) : (
                     <div className="flex h-full w-full items-center justify-center bg-slate-100">
                         {listing.type === 'venue' ?
-                            <Building className="h-10 w-10 text-slate-300" /> :
-                            <Sparkles className="h-10 w-10 text-slate-300" />
+                            <Building className="h-10 w-10 text-slate-300" aria-hidden="true" /> :
+                            <Sparkles className="h-10 w-10 text-slate-300" aria-hidden="true" />
                         }
                     </div>
                 )}
@@ -60,20 +60,20 @@ export function ListingCard({ listing }: ListingCardProps) {
                     {listing.title}
                 </h3>
                 <div className="flex items-center text-sm text-slate-500 mb-4">
-                    <MapPin className="h-4 w-4 mr-1 text-orange-400" />
+                    <MapPin className="h-4 w-4 mr-1 text-orange-400" aria-hidden="true" />
                     {listing.cities?.name || 'Various Locations'}
                 </div>
 
                 <div className="flex items-center gap-4 pt-4 border-t border-slate-100 text-sm">
                     {listing.type === 'venue' && listing.listing_venues?.[0] && (
                         <div className="flex items-center gap-1.5 text-slate-600 font-medium">
-                            <Users className="h-4 w-4 text-orange-400" />
+                            <Users className="h-4 w-4 text-orange-400" aria-hidden="true" />
                             <span>Up to {listing.listing_venues[0].capacity_max}</span>
                         </div>
                     )}
                     {listing.type === 'service' && (
                         <div className="flex items-center gap-1.5 text-slate-600 font-medium">
-                            <Tag className="h-4 w-4 text-blue-400" />
+                            <Tag className="h-4 w-4 text-blue-400" aria-hidden="true" />
                             <span>Service Provider</span>
                         </div>
                     )}
