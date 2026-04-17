@@ -31,7 +31,7 @@ export function Navbar() {
                                 Dashboard
                             </Link>
                             <form action={logout}>
-                                <Button variant="outline" size="sm" type="submit">
+                                <Button variant="outline" size="sm" type="submit" className="active:scale-95">
                                     Sign Out
                                 </Button>
                             </form>
@@ -42,7 +42,7 @@ export function Navbar() {
                                 Sign In
                             </Link>
                             <Link href="/signup">
-                                <Button size="sm">Get Started</Button>
+                                <Button size="sm" className="active:scale-95">Get Started</Button>
                             </Link>
                         </>
                     )}
