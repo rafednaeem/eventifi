@@ -19,7 +19,7 @@ export function ListingCard({ listing }: ListingCardProps) {
     return (
         <Link
             href={`/listing/${listing.slug}`}
-            className="group flex flex-col bg-white rounded-3xl border border-slate-200 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 block"
+            className="group flex flex-col bg-white rounded-3xl border border-slate-200 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 active:scale-[0.99] block"
         >
             <div className="aspect-[4/3] relative bg-slate-100 overflow-hidden">
                 {listing.cover_image_url ? (
