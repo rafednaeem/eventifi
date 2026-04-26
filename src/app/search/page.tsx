@@ -137,7 +137,7 @@ export default async function SearchPage({
                                 />
                             </div>
 
-                            <Button type="submit" className="w-full gap-2 bg-orange-600 hover:bg-orange-700 text-white">
+                            <Button type="submit" className="w-full gap-2 bg-orange-600 hover:bg-orange-700 text-white active:scale-[0.98]">
                                 <Search className="h-4 w-4" />
                                 Search
                             </Button>
