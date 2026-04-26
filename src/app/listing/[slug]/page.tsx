@@ -84,10 +84,10 @@ export default async function ListingDetailPage({
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-3">
-                                    <Button variant="outline" className="rounded-2xl h-12 px-6 border-slate-200 text-slate-600 hover:bg-slate-50 font-bold gap-2">
+                                    <Button variant="outline" className="rounded-2xl h-12 px-6 border-slate-200 text-slate-600 hover:bg-slate-50 font-bold gap-2 active:scale-95">
                                         <Share2 className="h-4 w-4" /> Share
                                     </Button>
-                                    <Button variant="outline" className="rounded-2xl h-12 w-12 border-slate-200 text-slate-600 hover:bg-slate-50 font-bold">
+                                    <Button variant="outline" aria-label="Add to favorites" className="rounded-2xl h-12 w-12 border-slate-200 text-slate-600 hover:bg-slate-50 font-bold active:scale-95">
                                         <Heart className="h-5 w-5" />
                                     </Button>
                                 </div>
