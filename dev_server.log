@@ -1,0 +1,14 @@
+
+> all_in_one_app_for_event_services@0.1.0 dev /app
+> next dev --port 3003
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3003
+- Network:       http://192.168.0.2:3003
+
+✓ Starting...
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+✓ Ready in 1998ms
+○ Compiling / ...
+ GET / 200 in 19.6s (compile: 4.8s, proxy.ts: 138ms, render: 14.7s)
+ GET / 200 in 14.4s (compile: 14ms, proxy.ts: 29ms, render: 14.3s)
