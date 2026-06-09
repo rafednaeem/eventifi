@@ -4,9 +4,11 @@ import {
   Building, Camera, Heart, Music, Palette, Utensils, Waves, Trophy, Trees, Sparkles, Video, Truck, Users, Calendar, Home,
   Menu, MapPin, Search, ArrowRight, Castle, Hotel, Tent
 } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
+import { Label } from '@/components/ui'
 
 // Icon mapping helper
-const icons: Record<string, any> = {
+const icons: Record<string, LucideIcon> = {
   Building, Camera, Waves, Trophy, Trees, Utensils, Music, Palette, Video, Truck, Users, Calendar, Heart, Sparkles, Home, Castle, Hotel, Tent
 }
 
@@ -52,9 +54,13 @@ export default async function LandingPage() {
               </button>
             </div>
             {/* Mobile Menu Button */}
-            <div className="md:hidden text-slate-600">
+            <button
+              type="button"
+              aria-label="Open menu"
+              className="md:hidden text-slate-600 p-2 -mr-2 hover:bg-gray-100 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 transition-colors"
+            >
               <Menu className="w-6 h-6" />
-            </div>
+            </button>
           </div>
         </div>
       </nav>
@@ -85,14 +91,16 @@ export default async function LandingPage() {
 
           {/* Search Bar */}
           <form action="/search" method="GET" className="bg-white p-2 rounded-2xl shadow-2xl max-w-4xl mx-auto flex flex-col md:flex-row gap-2 items-center transform hover:scale-[1.01] transition-transform duration-300">
-            <div className="flex-1 w-full flex items-center px-4 h-14 bg-gray-50 rounded-xl border border-transparent hover:border-orange-200 transition-colors">
+            <div className="flex-1 w-full flex items-center px-4 h-14 bg-gray-50 rounded-xl border border-transparent hover:border-orange-200 focus-within:ring-2 focus-within:ring-orange-500/20 focus-within:border-orange-400 transition-all">
+              <Label htmlFor="city-input" className="sr-only">Location</Label>
               <MapPin className="text-orange-500 w-5 h-5 mr-3 shrink-0" />
-              <input type="text" name="city" placeholder="Location (e.g. Lahore)" className="bg-transparent w-full outline-none text-slate-700 placeholder-slate-400 font-medium" />
+              <input id="city-input" type="text" name="city" placeholder="Location (e.g. Lahore)" className="bg-transparent w-full outline-none text-slate-700 placeholder-slate-400 font-medium" />
             </div>
             <div className="hidden md:block w-px h-8 bg-gray-200"></div>
-            <div className="flex-1 w-full flex items-center px-4 h-14 bg-gray-50 rounded-xl border border-transparent hover:border-orange-200 transition-colors">
+            <div className="flex-1 w-full flex items-center px-4 h-14 bg-gray-50 rounded-xl border border-transparent hover:border-orange-200 focus-within:ring-2 focus-within:ring-orange-500/20 focus-within:border-orange-400 transition-all">
+              <Label htmlFor="search-input" className="sr-only">Search venues or services</Label>
               <Search className="text-orange-500 w-5 h-5 mr-3 shrink-0" />
-              <input type="text" name="q" placeholder="Search Venues or Services..." className="bg-transparent w-full outline-none text-slate-700 placeholder-slate-400 font-medium" />
+              <input id="search-input" type="text" name="q" placeholder="Search Venues or Services..." className="bg-transparent w-full outline-none text-slate-700 placeholder-slate-400 font-medium" />
             </div>
             <button type="submit" className="w-full md:w-auto px-10 h-14 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-orange-500/30 flex items-center justify-center gap-2">
               Search
